@@ -377,3 +377,9 @@ footer {
 .flex-card .primary-btn {
   margin: 10px;
 }
+
+.bg {
+  color: white;
+  background: url('../public/images/bg.png') no-repeat center center/cover;
+  height: 100vh;
+}

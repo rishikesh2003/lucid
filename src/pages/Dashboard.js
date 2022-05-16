@@ -19,9 +19,9 @@ const Dashboard = () => {
       <Navbar />
       {user && (
         <div>
-          <h2>Welcome, {user.user_metadata.name}</h2>
-          <p>Email : {user.email}</p>
-          <p></p>
+          <h2 style={{ padding: "10px 0", textAlign: "center" }}>
+            Welcome, {user.user_metadata.name}
+          </h2>
         </div>
       )}
     </>
