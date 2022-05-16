@@ -102,7 +102,12 @@ const Navbar = () => {
               />
             </div>
             <div className="flex-center">
-              <h2 style={{ textAlign: "center" }}> Lucid.</h2>
+              <img
+                style={{ height: "50px" }}
+                src="/images/logo.png"
+                alt="logo"
+              />
+              <h2 style={{ textAlign: "center" }}>Lucid.</h2>
             </div>
           </div>
           <Drawer

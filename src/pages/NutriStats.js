@@ -4,12 +4,24 @@ import { useEffect, useState } from "react";
 import supabase, { nutristatsURLGenerator } from "../config";
 import styles from "./css/form.module.css";
 import { LoadingButton } from "@mui/lab";
-import { TextareaAutosize } from "@mui/material";
+import {
+  Button,
+  TextareaAutosize,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from "@mui/material";
 
 const NutriStats = () => {
   const [loading, setLoading] = useState(false);
   const [ingr, setIngr] = useState("");
   const [data, setData] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const navigate = useNavigate();
   useEffect(() => {
     const user = supabase.auth.user();
@@ -54,6 +66,17 @@ const NutriStats = () => {
               variant="outlined"
             />
           </div>
+          <Button
+            onClick={() => {
+              setOpen(true);
+            }}
+            style={{ margin: "10px 0" }}
+            className="primary-btn"
+            variant="contained"
+            fullWidth
+          >
+            Instructions
+          </Button>
           <LoadingButton
             fullWidth
             type="submit"
@@ -63,6 +86,29 @@ const NutriStats = () => {
           >
             Analyze
           </LoadingButton>
+          <Dialog onClose={handleClose} open={open}>
+            <DialogTitle>Instructions.</DialogTitle>
+            <DialogContent>
+              <li>
+                Always include quantity: "3 oz of butter cookies" is better than
+                "butter cookies or tuilles"
+              </li>
+              <li>
+                Shorten and simplify the line: "2 cans of garbanzo beans,
+                drained" is better than "2-2 1/2 cans of washed and drained
+                garbanzo beans"
+              </li>
+              <li>
+                If oil is used for frying, indicate it in the ingredient line
+                (add the words "for frying"), so we can calculate how much gets
+                absorbed
+              </li>
+              <li>
+                For stocks and broths, enter "stock" or "broth" in the recipe
+                field, or we'll assume it's a soup
+              </li>
+            </DialogContent>
+          </Dialog>
         </form>
       </div>
       {data && (

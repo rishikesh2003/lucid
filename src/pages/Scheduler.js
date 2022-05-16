@@ -4,7 +4,7 @@ import supabase from "../config";
 import { useNavigate } from "react-router-dom";
 import DonutChart from "react-donut-chart";
 import styles from "./css/form.module.css";
-import { TextField } from "@mui/material";
+import { TextField, Alert } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 const Scheduler = () => {
@@ -12,6 +12,7 @@ const Scheduler = () => {
   const [workH, setWorkH] = useState("");
   const [leisureH, setLeisureH] = useState("");
   const [data, setData] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -24,30 +25,40 @@ const Scheduler = () => {
   const handleClick = (e) => {
     e.preventDefault();
     setLoading(true);
-
-    const sleep = 8;
-    const totalNotFree = sleep + Number(workH) + Number(leisureH);
-    const totalFree = 24 - totalNotFree;
-
-    const d = [
-      { label: "Yoga", value: ((totalFree * (10 / 100)) / 24) * 100 },
-      { label: "Meditation", value: ((totalFree * (10 / 100)) / 24) * 100 },
-      { label: "Breakfast", value: ((totalFree * (10 / 100)) / 24) * 100 },
-      { label: "Work", value: (workH / 24) * 100 },
-      { label: "Reading Books", value: ((totalFree * (20 / 100)) / 24) * 100 },
-      { label: "Leisure", value: (leisureH / 24) * 100 },
-      { label: "Study / Work", value: ((totalFree * (10 / 100)) / 24) * 100 },
-      { label: "Dinner", value: ((totalFree * (10 / 100)) / 24) * 100 },
-      { label: "Sleep", value: (8 / 24) * 100 },
-    ];
-    d.forEach((d) => {
-      d.value = Math.floor(d.value, 4);
-    });
-    // breakfast, dinner -> 10 % each work -> Yoga -20%, Meditation 10%, Reading Books 20%, Study - 30%,
-    setTimeout(() => {
-      setData(d);
+    if (Number(workH) > 15) {
+      setError("Your work hours can't be greater than 15");
       setLoading(false);
-    }, 2000);
+    } else if (Number(leisureH) > 10) {
+      setError("Your leisure hours can't be greater than 10");
+      setLoading(false);
+    } else {
+      const sleep = 8;
+      const totalNotFree = sleep + Number(workH) + Number(leisureH);
+      const totalFree = 24 - totalNotFree;
+
+      const d = [
+        { label: "Yoga", value: ((totalFree * (10 / 100)) / 24) * 100 },
+        { label: "Meditation", value: ((totalFree * (10 / 100)) / 24) * 100 },
+        { label: "Breakfast", value: ((totalFree * (10 / 100)) / 24) * 100 },
+        { label: "Work", value: (workH / 24) * 100 },
+        {
+          label: "Reading Books",
+          value: ((totalFree * (20 / 100)) / 24) * 100,
+        },
+        { label: "Leisure", value: (leisureH / 24) * 100 },
+        { label: "Study / Work", value: ((totalFree * (10 / 100)) / 24) * 100 },
+        { label: "Dinner", value: ((totalFree * (10 / 100)) / 24) * 100 },
+        { label: "Sleep", value: (8 / 24) * 100 },
+      ];
+      d.forEach((d) => {
+        d.value = Math.floor(d.value, 4);
+      });
+      // breakfast, dinner -> 10 % each work -> Yoga -20%, Meditation 10%, Reading Books 20%, Study - 30%,
+      setTimeout(() => {
+        setData(d);
+        setLoading(false);
+      }, 2000);
+    }
   };
   return (
     <>
@@ -90,6 +101,11 @@ const Scheduler = () => {
               apart from our schedule.
             </p>
           </div>
+          {error && (
+            <Alert style={{ margin: "10px 0" }} severity="error">
+              {error}
+            </Alert>
+          )}
           <LoadingButton
             fullWidth
             type="submit"
