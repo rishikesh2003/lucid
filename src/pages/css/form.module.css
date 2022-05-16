@@ -1,0 +1,16 @@
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.form {
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 20px;
+}
+
+.form-group {
+    margin: 15px 0;
+}

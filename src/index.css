@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Noto Serif', serif!important;
+}
+
+body {
+  overflow-x: hidden;
+
+}
+
+.primary-btn {
+  background-color: black !important;
+  color: white !important;
+  padding: 15px !important;
+}
+
+.no-links {
+  text-decoration: none;
+}
+
+/* navbar stylings */
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+}
+
+.navbar {
+  display: flex;
+  padding: 20px;
+  background: black;
+  color: white;
+  height: 80px;
+}
+
+.navbar h2 {
+  margin-left: 5px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: black;
+  color: white;
+}
+
+/* spinner */
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.spinner {
+  border: 8px solid #f3f3f3; 
+  border-top: 8px solid #000; 
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 0.5s linear infinite;
+  margin: 12px 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.nutrition-data {
+  padding: 20px;
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nutrition-data .labels {
+  width: 200px;
+  padding: 10px;
+}
+
+.labels li {
+  text-transform: capitalize;
+}
+
+.nutrition-data div {
+  margin: 12px;
+}
+
+.chart-container {
+  margin: 20px 0;
+}
+
+
+.flex-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video {
+  width: 100vw;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: -1;
+}
+
+.video video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* APP */
+.app {
+  width: 100vw;
+  height: 80vh;
+  display: grid;
+  grid-template-areas:
+    "a a a a s s"
+    "a a a a s s"
+    "d d d d s s"
+    "d d d d s s";
+
+  transition: opacity 500ms ease-in-out;
+}
+.inactive {
+  opacity: 0;
+}
+
+/* AUDIO */
+.audio {
+  grid-area: a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.audio img {
+  width: 50px;
+  cursor: pointer;
+}
+.audio .progress {
+  width: 200px;
+  height: 200px;
+
+  position: relative;
+
+  margin: 0 40px;
+}
+.audio .progress svg {
+  width: 200px;
+  height: 200px;
+
+  transform: rotate(45deg);
+
+  position: absolute;
+  z-index: -1;
+}
+.audio .progress .audio-remaining-time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  color: #fff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+}
+/* DURATIONS */
+.durations {
+  grid-area: d;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 25%;
+  margin-bottom: 25px;
+}
+.durations .duration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.durations .duration img {
+  width: 75px;
+  cursor: pointer;
+
+  filter: drop-shadow(0px 0px 15px #222);
+}
+.durations .duration p {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+
+  color: #fff;
+
+  margin-top: 5px;
+
+  text-shadow: 0px 0px 15px #222;
+}
+/* SEASONS */
+.seasons {
+  grid-area: s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 40% 0;
+}
+.seasons .season img {
+
+  width: 75px;
+  cursor: pointer;
+  filter: drop-shadow(0px 0px 15px #222);
+}
+
+/* TOGGLE MENU */
+.toggle-menu {
+  display: none;
+}
+
+/* FOR SMALL SCREENS */
+@media screen and (max-width: 600px) {
+  /* VIDEO */
+  .video video {
+    height: 100%;
+  }
+
+  /* APP */
+  .app {
+    grid-template-areas:
+      "a"
+      "a"
+      "a"
+      "d";
+  }
+
+  /* AUDIO */
+  .audio .progress {
+    width: 175px;
+    height: 175px;
+
+    margin: 0 10px;
+  }
+  .audio .play img,
+  .pause img {
+    width: 40px;
+  }
+  .audio .progress svg {
+    width: 175px;
+    height: 175px;
+  }
+  .audio .progress .rect1,
+  .rect {
+    width: 125px;
+    height: 125px;
+  }
+  .audio .progress .audio-remaining-time {
+    font-size: 1.75rem;
+  }
+
+  /* DURATIONS */
+  .durations {
+    padding: 0 10%;
+  }
+  .durations .duration img {
+    width: 60px;
+  }
+  .durations .duration p {
+    font-size: 1rem;
+  }
+
+  /* SEASONS */
+  .seasons {
+    position: absolute;
+    top: 100px;
+    left: -250px;
+    padding: 5px;
+
+    flex-direction: row;
+
+    background-color: #fff;
+
+    border-radius: 0 5px 5px 0;
+
+    transition: left 500ms ease-in-out;
+  }
+  .open {
+    left: 0px;
+  }
+  .seasons .season {
+    margin-left: 10px;
+  }
+  .seasons .season img {
+    width: 50px;
+    filter: none;
+  }
+
+  /* TOGGLE MENU */
+  .toggle-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px;
+
+    margin-left: 10px;
+
+    border-radius: 50%;
+
+    transition: all 500ms ease-in-out;
+  }
+  .rotate {
+    transform: rotate(180deg);
+  }
+  .toggle-menu:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  .toggle-menu img {
+    width: 20px;
+  }
+}
+
+.salad img {
+  width: 300px;
+  margin: 5px 0;
+}
+
+.main-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.book-card {
+  padding: 20px;
+  display: flex;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin: 20px;
+}
+
+.book-card img {
+  height: 200px;
+  margin-right: 10px;
+}
+
+.flex-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: 60vh;
+}
+
+.flex-card .primary-btn {
+  margin: 10px;
+}
